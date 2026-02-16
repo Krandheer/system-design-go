@@ -86,7 +86,7 @@ type Saver interface {
     Save(user User) error
 }
 
-// any type that has implement save method can be passed as saver here.
+// any type that has implemented save method can be passed as saver here.
 func CreateUser(s Saver, u User) {
     s.Save(u)
 }
