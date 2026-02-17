@@ -68,7 +68,7 @@ import (
 // Fan-Out: Multiple workers reading from same channel
 func worker(in <-chan int) <-chan int {
     out := make(chan int)
-    // if a function returns a channel and keep writing to it, then it must goroutine, 
+    // if a function returns a channel (out being returned here) and keep writing to it, then it must be goroutine, 
     // because writing to channel is blocking.
     go func() {
         for n := range in {
@@ -103,6 +103,10 @@ func merge(cs ...<-chan int) <-chan int {
     return out
 }
 
+// channel is initialised, later in seprate go-routine values being filled in, workers waiting for those values in channel and they will close their output
+// channel when they stop listening to in channel, that is when in channel gets closed. merger listen to c1 and c2 out channel of workers, and merge them till 
+// they are exhusted, exhaustion get noticed when these channel are close in worker. 
+// Finally we start printing merger out channel values and when to stop we know that on basis of when that channel is closed in merger.
 func main() {
     in := make(chan int)
     

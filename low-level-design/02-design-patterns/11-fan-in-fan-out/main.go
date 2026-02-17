@@ -57,6 +57,8 @@ func merger(cs ...<-chan int) <-chan int {
 
 	// Start a goroutine to close the output channel once all the input
 	// channels are closed and their values have been processed.
+	// If you need to wait for goroutines but must return immediately so that main can consume from the merged result
+	// the wait must happen in another goroutine.
 	go func() {
 		wg.Wait()
 		close(out)
