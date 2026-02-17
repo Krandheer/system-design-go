@@ -68,6 +68,8 @@ import (
 // Fan-Out: Multiple workers reading from same channel
 func worker(in <-chan int) <-chan int {
     out := make(chan int)
+    // if a function returns a channel and keep writing to it, then it must goroutine, 
+    // because writing to channel is blocking.
     go func() {
         for n := range in {
             out <- n * n

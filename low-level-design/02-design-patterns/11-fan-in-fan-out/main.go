@@ -9,6 +9,8 @@ import (
 // It closes the channel when it's done.
 func producer(nums ...int) <-chan int {
 	out := make(chan int)
+	// if a function returns a channel and keep writing to it, then it must run in a goroutine, 
+    // because writing to channel is blocking.
 	go func() {
 		defer close(out)
 		for _, n := range nums {
@@ -23,6 +25,7 @@ func producer(nums ...int) <-chan int {
 // This is the "Fan-out" part of our pipeline.
 func worker(in <-chan int) <-chan int {
 	out := make(chan int)
+	// If a stage both reads and writes channels, it must run in a goroutine. because reading and writing to channel is blocking.
 	go func() {
 		defer close(out)
 		for n := range in {
