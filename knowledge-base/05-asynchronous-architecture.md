@@ -175,7 +175,8 @@ package main
 import "fmt"
 
 func main() {
-    // 1. Message Queue (Channels)
+    // 1. Message Queue (Channels), for workers, out of all workers one task if performed by only one worker, 
+    // Other workers perform the other task
     // Only one worker will receive "Task 1".
     queue := make(chan string)
     go func() { fmt.Println("Worker A got:", <-queue) }()
