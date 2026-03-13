@@ -2,6 +2,9 @@ package main
 
 import "fmt"
 
+// when you have only 2-3 notifier types, it's okay to use simple factory.
+// but when you have more than 3 notifier types, it's better to use factory method.
+
 // sendNotification is a helper function that demonstrates the client's perspective.
 // It uses the factory to get a notifier and then uses it.
 func sendNotificationSimpleFactory(notifierType, message string) {
