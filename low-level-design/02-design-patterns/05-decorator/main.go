@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // --- The Component Interface ---
 // Pizza is the interface that both our base component and our decorators will implement.
@@ -65,7 +67,7 @@ func main() {
 	// 1. Wrap the plain pizza with a cheese topping.
 	pizzaWithCheese := &CheeseTopping{pizza: pizza}
 	printPizzaDetails(pizzaWithCheese)
-	
+
 	// 2. Wrap the already-decorated pizza with another topping.
 	// This shows how decorators can be stacked.
 	pizzaWithCheeseAndTomato := &TomatoTopping{pizza: pizzaWithCheese}
